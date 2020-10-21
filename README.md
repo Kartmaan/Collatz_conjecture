@@ -17,4 +17,4 @@ The program designed with PyQt5 generate Collatz conjecture sequences. The progr
 - Copy the sequence(s) generated to the clipboard
 - Randomly generate numbers
 
-![collatz](https://user-images.githubusercontent.com/11463619/96721613-ab0d2480-13ac-11eb-8281-9e48eab896dd.png)
+![collatz](https://user-images.githubusercontent.com/11463619/96777644-df9fd100-13ea-11eb-8404-d04e714da630.png)
