@@ -3,7 +3,7 @@ __author__ = "Kartmaan"
 __version__ = "0.5"
 
 from PyQt5 import QtWidgets
-from window_collatz import Ui_MainWindow
+from window import Ui_MainWindow
 import pyqtgraph.exporters
 import pyqtgraph as pg
 
@@ -36,7 +36,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.number2 = ""
         
     def checkBox(self) :
-        # Checkbox behaviour
+        # QCheckbox behaviour
         if self.checkBox_nb2.isChecked() :
             self.input_2.setEnabled(True) #QLineEdit_2 enable
         else :
