@@ -27,13 +27,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
 
         self.list_1 = []
         self.list_2 = []
+        self.number1 = ""
+        self.number2 = ""
         
     def checkBox(self) :
         # Checkbox behaviour
         if self.checkBox_nb2.isChecked() :
             self.input_2.setEnabled(True) #LineEdit_2 enable
         else :
-            self.input_2.setEnabled(False) #LineEdit_2 disable
+            self.input_2.setEnabled(False)
     
     def syra(self, x): # <int>
         # Renvoie une liste contenant la suite de Syracuse du nombre x
@@ -143,11 +145,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
 
     def copy(self):
         # Button copy behaviour
-        if len(self.list_1) > 0 and len(self.list_2) == 0:
+        if self.checkBox_nb2.isChecked() == False :
             output = "--- Number {} ---\n{}".format(self.input_1.text(), self.list_1)
             pyperclip.copy(output)
 
-        if len(self.list_1) > 0 and len(self.list_2) > 0:
+        if self.checkBox_nb2.isChecked() :
             output1 = "--- Number {} ---\n{}\n".format(self.input_1.text(), self.list_1)
             output2 = "\n--- Number {} ---\n{}".format(self.input_2.text(), self.list_2)
             output = (output1 + output2)
@@ -174,6 +176,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
             self.input_2.setText(y)
 
             self.look()
+
+    def stat_display(self, nb, syraList) :
+        # Display stats of syraStats
+        tif, alt, alt_max, alt_mean, alt_median, even, odd = self.syraStats(nb, syraList)
+        line1 = "Number {} : \n".format(nb)
+        line2 = "Flight time = {} | On altitude = {} | Max altitude = {} | Average altitude = {}\n".format(tif, alt, alt_max, alt_mean)
+        line3 = "Even numbers = {} | Odd numbers = {}".format(even, odd)
+        stat = line1 + line2 + line3
+
+        return stat
 
     def look(self):
         # Button "Have a look" behaviour
@@ -204,14 +216,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         #print(self.list_1)
 
         # NB1 STATS --------------------------
-        tif, alt, alt_max, alt_mean, alt_median, even, odd = (
-            self.syraStats(nb_1, syra_list))  
-        
-        self.text_nb1.setText("Number {} : \n"
-        "Flight time = {} | On altitude = {} | Max altitude = {} | Average altitude = {} | "
-        "Even numbers = {} | Odd numbers = {}".format(
-            nb_1, tif, alt, alt_max, alt_mean, even, odd))
-        
+        self.text_nb1.setText(self.stat_display(nb_1, syra_list))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb1),(str(nb_1)))
+        if self.checkBox_nb2.isChecked() == False :
+                self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb2),("nb2"))
+                self.text_nb2.setText("")
+
         # NB1 GRAPH --------------------------
         if self.checkBox_nb2.isChecked() == False :
             self.graphWidget.setTitle("Number {}".format(nb_1))
@@ -240,13 +250,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
             #print(self.list_2)
 
             # NB2 STATS --------------------------
-            tif, alt, alt_max, alt_mean, alt_median, even, odd = (
-            self.syraStats(nb_2, syra_list2))  
-        
-            self.text_nb2.setText("Number {} : \n"
-            "Flight time = {} | On altitude = {} | Max altitude = {} | Average altitude = {} | "
-            "Even numbers = {} | Odd numbers = {}".format(
-                nb_2, tif, alt, alt_max, alt_mean, even, odd))
+            self.text_nb2.setText(self.stat_display(nb_2, syra_list2))
+            self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb2),(str(nb_2)))
 
             # NB2 GRAPH --------------------------
             self.graphWidget.setTitle("Numbers {} / {}".format(nb_1, nb_2))

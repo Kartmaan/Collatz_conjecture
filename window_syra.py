@@ -191,7 +191,7 @@ class Ui_MainWindow(object):
 
         # Adding tab1
         self.tabWidget.addTab(self.tab_nb1, "")
-        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb1)
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb1),("nb1"))
 
         # Tab 2 creation
         self.tab_nb2 = QtWidgets.QWidget()
@@ -209,6 +209,7 @@ class Ui_MainWindow(object):
 
         # Adding tab2
         self.tabWidget.addTab(self.tab_nb2, "")
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb2),("nb2"))
         # Tab -----------------------------------------------
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -228,8 +229,8 @@ class Ui_MainWindow(object):
         self.label_nb2.setText(_translate("MainWindow", "Number 2"))
         #self.label_title.setText(_translate("MainWindow", "Syracuse generator"))
         self.label_version.setText(_translate("MainWindow", "V. 0.5"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb1), _translate("MainWindow", "nb1"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb2), _translate("MainWindow", "nb2"))
+        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb1), _translate("MainWindow", "nb1"))
+        #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb2), _translate("MainWindow", "nb2"))
 
 if __name__ == "__main__":
     import sys
