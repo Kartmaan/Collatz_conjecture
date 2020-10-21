@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PyQt5 import QtWidgets
 from window_collatz import Ui_MainWindow
 import pyqtgraph.exporters
