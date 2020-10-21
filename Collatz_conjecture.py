@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+__author__ = "Kartmaan"
+__version__ = "0.5"
 
 from PyQt5 import QtWidgets
 from window_collatz import Ui_MainWindow
@@ -8,7 +10,7 @@ import pyqtgraph as pg
 import sys
 import random
 import numpy as np
-import pyperclip
+import pyperclip # Copy to clipboard
 from statistics import mean, median
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
@@ -16,12 +18,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         super().__init__()
         self.setupUi(self)
 
+        # Link widgets to their functions
         self.checkBox_nb2.stateChanged.connect(self.checkBox)
         self.button_look.clicked.connect(self.look)
         self.button_save.clicked.connect(self.export)
         self.button_copy.clicked.connect(self.copy)
         self.button_lucky.clicked.connect(self.lucky)
 
+        # Initial state of widgets
         self.button_save.setEnabled(False)
         self.button_copy.setEnabled(False)
         self.label_status.setText(". . .")
@@ -34,12 +38,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
     def checkBox(self) :
         # Checkbox behaviour
         if self.checkBox_nb2.isChecked() :
-            self.input_2.setEnabled(True) #LineEdit_2 enable
+            self.input_2.setEnabled(True) #QLineEdit_2 enable
         else :
-            self.input_2.setEnabled(False)
+            self.input_2.setEnabled(False) #QLineEdit_2 disable
     
-    def syra(self, x): # <int>
-        # Renvoie une liste contenant la suite de Syracuse du nombre x
+    def collatz(self, x): # <int>
+        # Function that return a Collatz sequence from int value
         x = int(x)
         i = 0 # Security cursor 
         wd = 50000 # Watchdog limit
@@ -68,24 +72,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
                     break
         return L # <list>
 
-    def syraStats(self, value, syra_list) : # <int>, <list>
+    def collatzStats(self, value, syra_list) : # <int>, <list>
+        # Function that return statistics from a Collatz sequence
         value = int(value)
 
         # Time in flight
         tif = len(syra_list)
 
-        # Time in altitude
         alt = []
         even = 0
         odd = 0
         for i in syra_list:
-            #odd / even
+            # odd / even
             if i % 2 == 0 :
                 even += 1
             if i % 2 != 0 :
                 odd += 1
 
-            # On altitude
+            # On altitude :
+            # number of values in the sequence greater than the initial value
             if i > value :
                 alt.append(i)
             else :
@@ -99,24 +104,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         # Average altitude
         mn = int(mean(syra_list))
 
-        # Median altitude
+        # Median altitude (not used)
         md = int(median(syra_list))
 
-        # Time in flight, on altitude, alt max, mean alt, median alt,
-        # evens, odds
+        # Index tuple :
+        # {0:Time in flight, 1:on altitude, 2:alt max, 3:mean alt, 4:median alt, 5:evens, 6:odds}
         return tif, alt, max, mn, md, even, odd # <tuple>
 
     def graph(self, syraList_1 = [], syraList_2 = []) :
+        # Graphic representation of Collatz sequences
         self.graphWidget.clear()
         self.graphWidget.addLegend()
 
-        if len(syraList_2) == 0 :
+        # Only one sequence to represent
+        if self.checkBox_nb2.isChecked() == False :
             x1 = list(range(1, len(syraList_1) + 1))
             x1 = np.array(x1)
             y1 = np.array(syraList_1)
             num_1 = self.input_1.text()
             self.graphWidget.plot(x1, y1, pen = self.red_pen, name = num_1)
 
+        # Two sequences to represent
         else :
             x1 = list(range(1, len(syraList_1) + 1))
             x1 = np.array(x1)
@@ -133,10 +141,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.button_save.setEnabled(True)
 
     def export(self) :
+        # Export the graph as .png at the current directory
         nb_1 = self.input_1.text()
         exporter = pg.exporters.ImageExporter(self.graphWidget.plotItem)
+
         if self.checkBox_nb2.isChecked() == False:
             exporter.export('{}.png'.format(nb_1))
+
         else :
             nb_2 = self.input_2.text()
             exporter = pg.exporters.ImageExporter(self.graphWidget.plotItem)
@@ -145,12 +156,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.label_status.setText("Image saved successfully")
 
     def copy(self):
-        # Button copy behaviour
-        if self.checkBox_nb2.isChecked() == False :
+        # Copy sequence(s) in clipboard
+        if self.checkBox_nb2.isChecked() == False : # One sequence
             output = "--- Number {} ---\n{}".format(self.input_1.text(), self.list_1)
             pyperclip.copy(output)
 
-        if self.checkBox_nb2.isChecked() :
+        if self.checkBox_nb2.isChecked() : # Two sequences
             output1 = "--- Number {} ---\n{}\n".format(self.input_1.text(), self.list_1)
             output2 = "\n--- Number {} ---\n{}".format(self.input_2.text(), self.list_2)
             output = (output1 + output2)
@@ -160,14 +171,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.label_status.setText("Copied to clipboard")
 
     def lucky(self):
-        max = 500000
-        if self.checkBox_nb2.isChecked() == False :
+        # Rondomize the inputs
+        max = 500000 # max interval
+        if self.checkBox_nb2.isChecked() == False : # 1 input
             x = random.randint(1,max)
             x = str(x)
             self.input_1.setText(x)
-            self.look()
+            self.look() # Automatic generation
 
-        if self.checkBox_nb2.isChecked():
+        if self.checkBox_nb2.isChecked(): # 2 inputs
             x = random.randint(1,max)
             y = random.randint(1,max)
             x = str(x)
@@ -176,11 +188,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
             self.input_1.setText(x)
             self.input_2.setText(y)
 
-            self.look()
+            self.look() # Automatic generation
 
     def stat_display(self, nb, syraList) :
-        # Display stats of syraStats
-        tif, alt, alt_max, alt_mean, alt_median, even, odd = self.syraStats(nb, syraList)
+        # Display stats from collatzStats
+        tif, alt, alt_max, alt_mean, alt_median, even, odd = self.collatzStats(nb, syraList)
         line1 = "Number {} : \n".format(nb)
         line2 = "Flight time = {} | On altitude = {} | Max altitude = {} | Average altitude = {}\n".format(tif, alt, alt_max, alt_mean)
         line3 = "Even numbers = {} | Odd numbers = {}".format(even, odd)
@@ -189,7 +201,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         return stat
 
     def look(self):
-        # Button "Have a look" behaviour
+        # Run all the generation process
+
         # ------------ TREATMENT OF NB1 ------------
         # NB1 EXTRACTION --------------------------
         nb_1 = self.input_1.text()
@@ -199,7 +212,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
             return None
 
         nb_1 = int(nb_1)
-        #print(nb_1)
         
         if nb_1 <= 0 :
             self.label_status.setText("The number must be greater than zero")
@@ -212,9 +224,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
                     return None
 
         # NB1 CALCULATION --------------------------
-        syra_list = self.syra(nb_1)
+        syra_list = self.collatz(nb_1)
         self.list_1 = syra_list
-        #print(self.list_1)
 
         # NB1 STATS --------------------------
         self.text_nb1.setText(self.stat_display(nb_1, syra_list))
@@ -239,16 +250,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
                 return None
 
             nb_2 = int(nb_2)
-            #print(nb_2)
 
             if nb_2 <= 0 :
                 self.label_status.setText("The number must be greater than zero")
                 return None
 
             # NB2 CALCULATION --------------------------
-            syra_list2 = self.syra(nb_2)
+            syra_list2 = self.collatz(nb_2)
             self.list_2 = syra_list2
-            #print(self.list_2)
 
             # NB2 STATS --------------------------
             self.text_nb2.setText(self.stat_display(nb_2, syra_list2))

@@ -139,6 +139,7 @@ class Ui_MainWindow(object):
         self.label_version = QtWidgets.QLabel(self.centralwidget)
         self.label_version.setGeometry(QtCore.QRect(930, 510, 111, 20))
         self.label_version.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_version.setText("0.5")
         self.label_version.setObjectName("label_version")
         
         # Inputs validators
@@ -228,7 +229,7 @@ class Ui_MainWindow(object):
         self.label_nb1.setText(_translate("MainWindow", "Number 1"))
         self.label_nb2.setText(_translate("MainWindow", "Number 2"))
         #self.label_title.setText(_translate("MainWindow", "Syracuse generator"))
-        self.label_version.setText(_translate("MainWindow", "V. 0.5"))
+        #self.label_version.setText(_translate("MainWindow", "V. 0.5"))
         #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb1), _translate("MainWindow", "nb1"))
         #self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_nb2), _translate("MainWindow", "nb2"))
 
