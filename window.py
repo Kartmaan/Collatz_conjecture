@@ -78,7 +78,7 @@ class Ui_MainWindow(object):
         # Button look
         font = QtGui.QFont()
         font.setFamily("Lucida Console")
-        font.setPointSize(11)
+        font.setPointSize(10)
         self.button_look = QtWidgets.QPushButton(self.centralwidget)
         self.button_look.setGeometry(QtCore.QRect(70, 310, 131, 61)) # 150, 310, 131, 61
         self.button_look.setFont(font)
@@ -88,7 +88,7 @@ class Ui_MainWindow(object):
         self.button_lucky = QtWidgets.QPushButton(self.centralwidget)
         self.button_lucky.setGeometry(QtCore.QRect(230, 310, 131, 61)) # 150, 310, 131, 61
         self.button_lucky.setFont(font)
-        self.button_lucky.setText("Feeling lucky")
+        self.button_lucky.setText("Randomize")
         self.button_lucky.setObjectName("button_lucky")
 
         # Label number 1

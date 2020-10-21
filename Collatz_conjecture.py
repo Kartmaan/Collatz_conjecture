@@ -153,7 +153,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
             exporter = pg.exporters.ImageExporter(self.graphWidget.plotItem)
             exporter.export('{}-{}.png'.format(nb_1, nb_2))
 
-        self.label_status.setText("Image saved successfully")
+        self.label_status.setText("Graph saved successfully")
 
     def copy(self):
         # Copy sequence(s) in clipboard
@@ -194,9 +194,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         # Display stats from collatzStats
         tif, alt, alt_max, alt_mean, alt_median, even, odd = self.collatzStats(nb, syraList)
         line1 = "Number {} : \n".format(nb)
-        line2 = "Flight time = {} | On altitude = {} | Max altitude = {} | Average altitude = {}\n".format(tif, alt, alt_max, alt_mean)
+        line2 = "Flight time = {} | On altitude = {} | Max altitude = {} | Avrg altitude = {}\n".format(tif, alt, alt_max, alt_mean)
         line3 = "Even numbers = {} | Odd numbers = {}".format(even, odd)
-        stat = line1 + line2 + line3
+        stat = line2 + line3
 
         return stat
 
