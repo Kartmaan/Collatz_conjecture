@@ -225,7 +225,7 @@ class Ui_MainWindow(object):
         #self.button_save.setText(_translate("MainWindow", "Save the graph ..."))
         self.status_groupBox.setTitle(_translate("MainWindow", "Status message"))
         self.label_status.setText(_translate("MainWindow", "Status message"))
-        self.button_look.setText(_translate("MainWindow", "Have a look"))
+        self.button_look.setText(_translate("MainWindow", "Take a look"))
         self.label_nb1.setText(_translate("MainWindow", "Number 1"))
         self.label_nb2.setText(_translate("MainWindow", "Number 2"))
         #self.label_title.setText(_translate("MainWindow", "Syracuse generator"))
