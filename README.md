@@ -6,7 +6,7 @@ The Collatz conjecture is defined as follows:
 - If the previous term x is even, the next term = x/2
 - If the previous term x is odd, the next term = x*3 + 1
 
-The conjecture is that whatever the value of n, the sequence will always reach 1 before oscillating indefinitely on the values 4,2,1,4,2,1,4,2,1, .... (in this program, the sequence generation process stops as soon as it encounters a 1)
+The conjecture is that whatever the value of n, the sequence will always reach 1 before oscillating indefinitely on the values 4,2,1,4,2,1,4,2,1, .... (in this program, the sequence generation process stops as soon as it encounters a 1). The Collatz conjecture is still an unsolved problem in mathematics, it has not yet been shown that all sequences reach 1 for an integer and positive initial value.
 
 ## What does the program do?
 The program designed with PyQt5 generate sequences from the Collatz conjecture. The program allows to:
