@@ -12,7 +12,7 @@ The conjecture is that whatever the value of n, the sequence will always reach 1
 The program designed with PyQt5 generate Collatz conjecture sequences. The program allows to:
 - Visualize graphically a sequence from a single input value
 - Compare the sequences of two input values in the form of two superimposed graphs
-- Display more detailed statistics (flight time, max altitude, average altitude, number of even/odd values)
+- Display more detailed statistics (flight time, time on altitude >n, max altitude, average altitude, number of even/odd values)
 - Save graphics in .png format
 - Copy the sequence(s) generated to the clipboard
 - Randomly generate Collatz sequences
