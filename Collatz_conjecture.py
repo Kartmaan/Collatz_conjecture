@@ -1,5 +1,4 @@
-from PyQt5 import QtWidgets#, QtCore
-#from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+from PyQt5 import QtWidgets
 from window_syra import Ui_MainWindow
 import pyqtgraph.exporters
 import pyqtgraph as pg

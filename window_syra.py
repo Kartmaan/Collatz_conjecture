@@ -129,8 +129,8 @@ class Ui_MainWindow(object):
         self.label_info.setFrameShape(QFrame.StyledPanel)
         self.label_info.setFont(font)
         text1 = "- Start with any positive integer n\n"
-        text2 = "- If the previous terme is even, the next term is n/2\n"
-        text3 = "- If the previous term is odd, the next term is n*3 + 1"
+        text2 = "- If the previous term x is even, the next term is x/2\n"
+        text3 = "- If the previous term x is odd, the next term is x*3 + 1"
         self.label_info.setText(text1 + text2 + text3)
         self.label_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_info.setObjectName("label_title")
