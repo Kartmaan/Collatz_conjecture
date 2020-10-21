@@ -32,8 +32,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
 
         self.list_1 = []
         self.list_2 = []
-        self.number1 = ""
-        self.number2 = ""
+        """ self.number1 = ""
+        self.number2 = "" """
         
     def checkBox(self) :
         # QCheckbox behaviour
@@ -172,7 +172,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
 
     def lucky(self):
         # Rondomize the inputs
-        max = 500000 # max interval
+        max = 50000 # max interval
         if self.checkBox_nb2.isChecked() == False : # 1 input
             x = random.randint(1,max)
             x = str(x)
