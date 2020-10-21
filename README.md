@@ -16,3 +16,5 @@ The program designed with PyQt5 generate sequences from the Collatz conjecture. 
 - Save graphics in .png format
 - Copy the lists of numbers generated to the clipboard
 - Randomly generate numbers
+
+![collatz](https://user-images.githubusercontent.com/11463619/96721613-ab0d2480-13ac-11eb-8281-9e48eab896dd.png)
