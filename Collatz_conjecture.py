@@ -47,7 +47,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         x = int(x)
         i = 0 # Security cursor 
         wd = 50000 # Watchdog limit
-        L = [] # List containing Syracuse numbers
+        L = [] # List containing Collatz sequence
     
         while True:
             # Even number
