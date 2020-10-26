@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
-__author__ = "Kartmaan"
-__version__ = "0.5"
-
-from PyQt5 import QtWidgets
-from window import Ui_MainWindow
-import pyqtgraph.exporters
-import pyqtgraph as pg
 
 import sys
 import random
+from statistics import mean, median
+
+from PyQt5 import QtWidgets
+import pyqtgraph.exporters
+import pyqtgraph as pg
 import numpy as np
 import pyperclip # Copy to clipboard
-from statistics import mean, median
+
+from window import Ui_MainWindow
+
+__author__ = "Kartmaan"
+__version__ = "0.5"
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
     def __init__(self) :
