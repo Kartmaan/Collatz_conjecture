@@ -9,7 +9,7 @@ The Collatz conjecture is defined as follows:
 The conjecture is that whatever the value of n, the sequence will always reach 1 before oscillating indefinitely on the values 4,2,1,4,2,1,4,2,1, .... (in this program, the sequence generation process stops as soon as it encounters a 1). The Collatz conjecture is still an unsolved problem in mathematics, it has not yet been shown that all sequences reach 1 for an integer and positive initial value.
 
 ## What does the program do?
-The program designed with PyQt5 generate Collatz conjecture sequences. The program allows to:
+The program designed with PyQt5 and PyQtGraph generate Collatz conjecture sequences. The program allows to:
 - Visualize graphically a sequence from a single input value
 - Compare the sequences of two input values in the form of two superimposed graphs
 - Display more detailed statistics (flight time, time on altitude >n, max altitude, average altitude, number of even/odd values)
