@@ -27,6 +27,6 @@ The program designed with PyQt5 and PyQtGraph generate Collatz conjecture sequen
 
 ## Requirements
 - `numpy`
-- `PyQt5
+- `PyQt5`
 - `pyqtgraph`
 - `pyperclip`
