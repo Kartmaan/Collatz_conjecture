@@ -38,14 +38,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.number2 = "" """
         
     def checkBox(self) :
-        # QCheckbox behaviour
+        """ QCheckbox behaviour """
+
         if self.checkBox_nb2.isChecked() :
             self.input_2.setEnabled(True) #QLineEdit_2 enable
         else :
             self.input_2.setEnabled(False) #QLineEdit_2 disable
     
     def collatz(self, x): # <int>
-        # Function that return a Collatz sequence from int value
+        """ Function that return a Collatz sequence from int value """
+
         x = int(x)
         i = 0 # Security cursor 
         wd = 50000 # Watchdog limit
@@ -75,10 +77,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         return L # <list>
 
     def collatzStats(self, value, syra_list) : # <int>, <list>
-        # Function that return statistics from a Collatz sequence
+        """ Function that return statistics from a Collatz sequence """
+
         value = int(value)
 
         # Time in flight
+        # Number of values greater than the initial value inserted
         tif = len(syra_list)
 
         alt = []
@@ -100,10 +104,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         alt = len(alt)
         
         # Max altitude
+        # Maximum value among the generated values
         max = sorted(syra_list)
         max = max[len(max)-1]
 
         # Average altitude
+        # Average value
         mn = int(mean(syra_list))
 
         # Median altitude (not used)
@@ -114,7 +120,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         return tif, alt, max, mn, md, even, odd # <tuple>
 
     def graph(self, syraList_1 = [], syraList_2 = []) :
-        # Graphic representation of Collatz sequences
+        """ Graphic representation of Collatz sequences """
+
         self.graphWidget.clear()
         self.graphWidget.addLegend()
 
@@ -143,7 +150,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.button_save.setEnabled(True)
 
     def export(self) :
-        # Export the graph as .png at the current directory
+        """ Export the graph as .png at the current directory """
+
         nb_1 = self.input_1.text()
         exporter = pg.exporters.ImageExporter(self.graphWidget.plotItem)
 
@@ -158,7 +166,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.label_status.setText("Graph saved successfully")
 
     def copy(self):
-        # Copy sequence(s) in clipboard
+        """ Copy sequence(s) in clipboard """
+
         if self.checkBox_nb2.isChecked() == False : # One sequence
             output = "--- Number {} ---\n{}".format(self.input_1.text(), self.list_1)
             pyperclip.copy(output)
@@ -173,7 +182,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         self.label_status.setText("Copied to clipboard")
 
     def lucky(self):
-        # Rondomize the inputs
+        """ Rondomize the inputs """
+
         max = 50000 # max interval
         if self.checkBox_nb2.isChecked() == False : # 1 input
             x = random.randint(1,max)
@@ -193,7 +203,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
             self.look() # Automatic generation
 
     def stat_display(self, nb, syraList) :
-        # Display stats from collatzStats
+        """ Display stats from collatzStats """
+
         tif, alt, alt_max, alt_mean, alt_median, even, odd = self.collatzStats(nb, syraList)
         line1 = "Number {} : \n".format(nb)
         line2 = "Flight time = {} | On altitude = {} | Max altitude = {} | Avrg altitude = {}\n".format(tif, alt, alt_max, alt_mean)
@@ -203,7 +214,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow) :
         return stat
 
     def look(self):
-        # Run all the generation process
+        """ Run all the generation process
+        Connect to button_look """
 
         # ------------ TREATMENT OF NB1 ------------
         # NB1 EXTRACTION --------------------------
